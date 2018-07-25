@@ -1,0 +1,11 @@
+sudo: false
+language: node_js
+node_js:
+  - '8'
+  - '10'
+install: npm i
+jobs:
+  include:
+    - stage: test
+      script: bash ./travis/deploy.sh
+dist: xenial
