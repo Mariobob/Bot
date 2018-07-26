@@ -7,6 +7,7 @@ const Collection = require('../../util/Collection');
 const Util = require('../../util/Util');
 const xnx = require('sj.reggol');
 const PermissionUtil = require('../../util/PermissionUtil');
+const i18n = require('i18n');
 
 module.exports = class RemClient extends Eris {
   constructor(options) {
@@ -14,7 +15,7 @@ module.exports = class RemClient extends Eris {
 
     this.cmds = new Collection();
     this.queue = new Collection();
-    this.reminders = new Collection();
+    this.locales = new Collection();
     this.commandStore = new CommandStore(this);
     this.eventStore = new EventStore(this);
     this.utils = new Util(this);
@@ -30,6 +31,14 @@ module.exports = class RemClient extends Eris {
       db: 'RemBot'
     });
     this.collector = new MessageCollector(this);
+
+    i18n.configure({
+      objectNotation: true,
+      autoReload: false,
+      defaultLocale: 'en-US',
+      locales: ['en-US']
+    });
+    i18n.init(this);
   }
 
   async launch() {
@@ -46,5 +55,11 @@ module.exports = class RemClient extends Eris {
   gatherInvite(permission) {
     permission = PermissionUtil.resolve(permission);
     return `https://discordapp.com/oauth2/authorize?client_id=${this.user.id}&scope=bot&permissions=${permission}`;
+  }
+
+  destory() {
+    this.disconnect({
+      reconnect: false
+    });
   }
 };

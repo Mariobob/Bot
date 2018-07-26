@@ -86,4 +86,17 @@ module.exports = class VoiceConnection {
   get position() {
     return this.player.state.position;
   }
+
+  toJSON() {
+    return {
+      bot: this.bot,
+      channel: this.channel,
+      queue: this.queue,
+      volume: this.volume,
+      player: this.player,
+      paused: this.paused,
+      nowPlaying: this.now,
+      position: this.position
+    };
+  }
 };

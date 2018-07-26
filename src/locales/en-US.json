@@ -1,0 +1,19 @@
+{
+  "locale": {
+    "code": "en-US",
+    "flag": ":flag_us:",
+    "full": "English (United States)"
+  },
+  "errors": {
+    "guild": "{{{ emote }}} | You're not in a guild to execute the `{{{ command }}}` command.",
+    "owner": "{{{ emote }}} | You don't own this bot.",
+    "cooldown": "{{{ emote }}} | Slow down! Please wait `{{{ time }}}{{{ second }}}` to execute the `{{{ command }}}` command.",
+    "unknown": "{{{ emote }}} | The command has failed to execute, the incident has been logged.",
+    "api": "{{{ emote }}} | Oh, an error has occured: `{{{ error }}}`. Try again later!"
+  },
+  "commands": {
+    "badge": {
+      "message": "{{{ emote }}} | Your current badge is:\n\n{{{ badge }}}"
+    }
+  }
+}

@@ -31,4 +31,10 @@ module.exports = class EventStore {
       });
     });
   }
+
+  toJSON() {
+    return {
+      bot: this.bot
+    };
+  }
 };

@@ -1,4 +1,7 @@
 module.exports = {
+  // Abstract
+  Structures: require('./abstract/Structures'),
+  
   // Collector
   MessageCollector: require('./collector/MessageCollector'),
 

@@ -13,9 +13,9 @@ module.exports = class BadgeCommand extends Command {
   }
 
   execute(ctx) {
-    this.bot.r.table('users').get(ctx.author.id).run((error, uConfig) => {
-      if (error) return this.bot.utils.handleDatabaseError(error);
-      return ctx.send(`${this.bot.constants.emojis.MEMO} | Your current badge is:\n${uConfig.badges.isDeveloper === true ? uConfig.badges.named.developer : uConfig.badges.isStaff === true ? uConfig.badges.named.staff : uConfig.badges.isTrusted === true ? uConfig.badges.named.trusted : uConfig.badges.named.normal}`);
+    return ctx.__('commands.badge.message', {
+      emote: this.bot.constants.emojis.MEMO,
+      badge: ctx.member.settings.isDeveloper === true ? ctx.member.settings.named.developer : ctx.member.settings.isStaff === true ? ctx.member.settings.named.staff : ctx.member.settings.isTrusted === true ? ctx.member.settings.named.trusted : ctx.member.settings.named.normal
     });
   }
 };

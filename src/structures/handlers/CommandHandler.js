@@ -1,5 +1,6 @@
 const Context = require('../internal/Context');
 const { Collection } = require('eris');
+const i18n = require('i18n');
 
 module.exports = class CommandHandler {
   constructor(bot) {
@@ -24,13 +25,17 @@ module.exports = class CommandHandler {
 
     const ctx = new Context(this.bot, msg);
     ctx.setPrefix(gConfig.prefix);
+    i18n.init(ctx);
 
     const args = msg.content.slice(prefix[0].length).trim().split(/ +/g);
     const command = args.shift();
     const cmd = this.bot.cmds.filter((c) => c.options.command === command || c.options.aliases.includes(command));
 
     if (cmd.length > 0) {
-      if (cmd[0].options.guildOnly && ctx.guild.type === 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must be in a guild!`);
+      if (cmd[0].options.guildOnly && ctx.guild.type === 1) return i18n.__('errors.guild', {
+        emote: this.bot.constants.emojis.ERROR,
+        command: cmd[0].options.command
+      });
       if (cmd[0].options.ownerOnly && !this.bot.isOwner(ctx.author.id)) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't own this bot.`);
       if (cmd[0].options.nsfw && !msg.channel.nsfw) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must be in an nsfw-marked channel.`);
 
@@ -51,7 +56,12 @@ module.exports = class CommandHandler {
 
         if (now < expirationTime) {
                 const timeLeft = (expirationTime - now) / 1000;
-                return msg.channel.createMessage(`${this.bot.constants.emojis.ERROR} | Please wait ${timeLeft.toFixed()} second${timeLeft > 1 ? "s" : ""} before executing the \`${cmd[0].options.command}\` command.`);
+                return i18n.__('errors.cooldown', {
+                  emote: this.bot.constants.emojis.ERROR,
+                  time: `${timeLeft.toFixed()}`,
+                  seconds: `second${timeLeft > 1 ? "s" : ""}`,
+                  command: cmd[0].options.command
+                });
         }
 
         timestamps.set(msg.author.id, now);
@@ -98,7 +108,6 @@ module.exports = class CommandHandler {
       .table('users')
       .insert({
         id: author.id,
-        prefix: this.bot.config.prefix,
         coins: 0,
         profile: {
           description: "No description provided.",
@@ -122,7 +131,8 @@ module.exports = class CommandHandler {
           to: null,
           isMarried: false
         },
-        upvoter: false
+        upvoter: false,
+        locale: 'en-US'
       }).run();
     this.bot.log.info(`Created the 'users' database for user ${author.username}!`);
   }

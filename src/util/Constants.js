@@ -49,5 +49,6 @@ exports.help = {
   Music: '<a:music:466727792910794754>',
   Settings: ':gear:',
   "Text Edit": ":pencil:",
-  Utility: ':tools:'
+  Utility: ':tools:',
+  "Minigames": ":video_game:"
 };

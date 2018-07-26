@@ -29,4 +29,10 @@ module.exports = class CommandStore {
       });
     }
   }
+
+  toJSON() {
+    return {
+      bot: this.bot
+    };
+  }
 };

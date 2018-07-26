@@ -31,7 +31,7 @@ module.exports = class CommandContext {
     return this.send(`<@${this.author.id}>, ${content}`);
   }
 
-  async setPrefix(prefix) {
+  setPrefix(prefix) {
     this.prefix = prefix;
   }
 
