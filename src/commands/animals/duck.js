@@ -10,12 +10,12 @@ module.exports = class DuckCommand extends Command {
       cooldown: 5
     });
 
-    this.snek = require('snekfetch');
+    this.request = require('../../util/RequestHandler');
   }
 
   async execute(ctx) {
     try {
-      const { body } = await this.snek.get('https://random-d.uk/api/v1/random');
+      const { body } = await this.request.get('https://random-d.uk/api/v1/random');
 
       return ctx.send({
         description: `<@${ctx.author.id}>: Here is your duck as requested! :duck:`,

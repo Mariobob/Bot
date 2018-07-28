@@ -5,9 +5,8 @@ const MessageCollector = require('../collector/MessageCollector');
 const CommandHandler = require('../handlers/CommandHandler');
 const Collection = require('../../util/Collection');
 const Util = require('../../util/Util');
-const xnx = require('sj.reggol');
+const Logger = require('../../util/Logger');
 const PermissionUtil = require('../../util/PermissionUtil');
-const i18n = require('i18n');
 
 module.exports = class RemClient extends Eris {
   constructor(options) {
@@ -15,12 +14,11 @@ module.exports = class RemClient extends Eris {
 
     this.cmds = new Collection();
     this.queue = new Collection();
-    this.locales = new Collection();
     this.commandStore = new CommandStore(this);
     this.eventStore = new EventStore(this);
     this.utils = new Util(this);
     this.commandHandler = new CommandHandler(this);
-    this.log = new xnx.Logger(true);
+    this.log = new Logger();
     this.color = 9752573;
     this.package = require('../../../package.json');
     this.config = require('../../config.json');
@@ -31,14 +29,10 @@ module.exports = class RemClient extends Eris {
       db: 'RemBot'
     });
     this.collector = new MessageCollector(this);
+    this.request = require('../../util/RequestHandler');
+    this.firstTime = false; // If it's your first time running the bot.
 
-    i18n.configure({
-      objectNotation: true,
-      autoReload: false,
-      defaultLocale: 'en-US',
-      locales: ['en-US']
-    });
-    i18n.init(this);
+    if (this.firstTime === true) return this.runFirstSequence();
   }
 
   async launch() {
@@ -49,7 +43,7 @@ module.exports = class RemClient extends Eris {
   }
 
   isOwner(id) {
-    return ['280158289667555328', '387043512232968193', '107130754189766656', '229552088525438977'].includes(id);
+    return ['280158289667555328', '387043512232968193', '145557815287611393', '229552088525438977'].includes(id);
   }
 
   gatherInvite(permission) {
@@ -61,5 +55,23 @@ module.exports = class RemClient extends Eris {
     this.disconnect({
       reconnect: false
     });
+  }
+
+  runFirstSequence() {
+    this.log.info('Welcome to the RemBot Project discord bot. We will begin the database querys shortly...');
+    this.utils.delay(5000);
+
+    this.log.info('Creating the database...');
+    this.r.dbCreate('RemBot').run();
+    this.log.info('Creating keys...');
+
+    this.r.tableCreate('guilds').run();
+    this.r.tableCreate('users').run();
+    this.r.tableCreate('intervals').run();
+    this.r.tableCreate('snipes').run();
+
+    this.log.info('Database has been created successfully. Now running the bot...');
+    this.firstTime = false; // Set it back to false so it won't loop everytime it runs.
+    this.launch();
   }
 };

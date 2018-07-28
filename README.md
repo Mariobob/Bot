@@ -36,12 +36,8 @@ and you should be all set!
 ## Credits
 * [PassTheMayo](https://mayo.pw) **~** VoiceConnection class, Music Commands, some fun commands, and more~
 * [Mantaro](https://mantaro.site) **~** Initial website design. 
-* [dragonfire535](https://github.com/dragonfire535) **~** memes.
+* [dragonfire535](https://github.com/dragonfire535) **~** memes and the RequestHandler for Rem. <3
 * [Aetheryx](https://github.com/Aetheryx) **~** MessageCollector. <3 (~~*love ya aeth*~~)
-* [discord.js Team](https://github.com/discordjs/discord.js) **~** The `Structures` class.
-  * What is the `Strutures` class? ;w;
-  * It's the ability to extend Eris' structure classes.
-* [iDroid27](https://github.com/iDroid27) **~** LocaleStore.
 
 ## Developers
 |Avatar|Name|Role|

@@ -107,7 +107,6 @@ const Languages = {
 };
 const reRegExpExpChar = /[\\^$.*+?()[\]{}|]/g;
 const regHasRegExpChar = new RegExp(reRegExpExpChar.source);
-const snek = require('snekfetch');
 
 module.exports = class RemUtil {
   constructor(bot) {
@@ -187,7 +186,7 @@ module.exports = class RemUtil {
 
   resolveTrack(query) {
     return new Promise((resolve, reject) => {
-      snek
+      this.bot.request
         .get(`http://${this.bot.config.lavalink.nodes[0].host}:${this.bot.config.lavalink.nodes[0].ws}/loadtracks`)
         .query({
           identifier: query
@@ -286,7 +285,7 @@ module.exports = class RemUtil {
 
   post() {
     // DBL (More soon TM)
-    snek.post(`https://discordbots.org/api/bots/${this.bot.user.id}/stats`)
+    this.bot.request.post(`https://discordbots.org/api/bots/${this.bot.user.id}/stats`)
       .set('Authorization', this.bot.config.api_keys.oliyBots)
       .send({
         server_count: this.bot.guilds.size,
@@ -299,19 +298,19 @@ module.exports = class RemUtil {
     this.bot.log.custom('DATABASE', e.stack);
   }
 
-  updateBalance(ctx, bal) {
+  updateBalance(author, bal) {
     return new Promise((res, rej) => {
-      this.bot.r.table('users').get(ctx.author.id).run((error, settings) => {
+      this.bot.r.table('users').get(author.id).run((error, settings) => {
         if (error) return rej(error);
         if (settings.coins) {
-          this.bot.r.table('users').get(ctx.author.id).update({
+          this.bot.r.table('users').get(author.id).update({
             coins: settings.coins + bal
           }).run((error) => {
             if (error) return rej(error);
             res(settings.coins + bal);
           });
         } else {
-          this.bot.r.table('users').get(ctx.author.id).update({
+          this.bot.r.table('users').get(author.id).update({
             coins: bal
           }).run((error) => {
             if (error) return rej(error);

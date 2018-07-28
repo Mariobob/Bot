@@ -1,10 +1,7 @@
 const { Client } = require('./structures');
 const config = require('./config.json');
-require('./extenders/RemMember');
-require('./extenders/RemGuild');
-require('./extenders/RemChannel');
 
-new Client({
+const client = new Client({
   token: config.token,
   clientOptions: {
     getAllUsers: true,
@@ -12,4 +9,11 @@ new Client({
     disableEveryone: true,
     autoreconnect: true
   }
-}).launch();
+});
+
+process.on('unhandledRejection', (e) => {
+  client.log.error(e.stack);
+});
+process.on('exit', () => {
+  client.destory();
+});

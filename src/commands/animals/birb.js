@@ -13,14 +13,12 @@ module.exports = class BirbCommand extends Command {
       cooldown: 5
     });
 
-    this.snek = require('snekfetch');
+    this.request = require('../../util/RequestHandler');
   }
 
   async execute(ctx) {
-    const message = await ctx.channel.createMessage(`${this.bot.constants.emojis.MEMO} | Grabbing birds...`);
-
     try {
-      const { body } = await this.snek.get('http://random.birb.pw/tweet');
+      const { body } = await this.request.get('http://random.birb.pw/tweet');
 
       message.delete();
       return ctx.send({

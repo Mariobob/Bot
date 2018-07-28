@@ -25,17 +25,15 @@ module.exports = class CommandHandler {
 
     const ctx = new Context(this.bot, msg);
     ctx.setPrefix(gConfig.prefix);
-    i18n.init(ctx);
+
+    if (uConfig.blacklist.isBlacklisted || gConfig.blacklist.isBlacklisted) return;
 
     const args = msg.content.slice(prefix[0].length).trim().split(/ +/g);
     const command = args.shift();
     const cmd = this.bot.cmds.filter((c) => c.options.command === command || c.options.aliases.includes(command));
 
     if (cmd.length > 0) {
-      if (cmd[0].options.guildOnly && ctx.guild.type === 1) return i18n.__('errors.guild', {
-        emote: this.bot.constants.emojis.ERROR,
-        command: cmd[0].options.command
-      });
+      if (cmd[0].options.guildOnly && ctx.guild.type === 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You're not in a guild.`);
       if (cmd[0].options.ownerOnly && !this.bot.isOwner(ctx.author.id)) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't own this bot.`);
       if (cmd[0].options.nsfw && !msg.channel.nsfw) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must be in an nsfw-marked channel.`);
 
@@ -56,12 +54,7 @@ module.exports = class CommandHandler {
 
         if (now < expirationTime) {
                 const timeLeft = (expirationTime - now) / 1000;
-                return i18n.__('errors.cooldown', {
-                  emote: this.bot.constants.emojis.ERROR,
-                  time: `${timeLeft.toFixed()}`,
-                  seconds: `second${timeLeft > 1 ? "s" : ""}`,
-                  command: cmd[0].options.command
-                });
+                return ctx.send(`${this.bot.constant.emojis.MEMO} | You have \`${timeLeft.toFixed()} second${timeLeft > 1 ? "s" : ""}\` before execute the \`${cmd[0].options.command}\` command.`);
         }
 
         timestamps.set(msg.author.id, now);
@@ -70,6 +63,7 @@ module.exports = class CommandHandler {
 
       try {
         await cmd[0].execute(ctx, args);
+        this.bot.log.custom(msg.channel.type === 1 ? 'DM' : ctx.guild.name, `User ${ctx.author.username}#${ctx.author.discriminator} ran the command ${command ? cmd[0].options.name : command}~`);
       } catch(err) {
         this.bot.log.error(err.stack);
         return ctx.send(`${this.bot.constants.emojis.ERROR} | The command has failed to execute, the incident has been logged.`);
@@ -97,6 +91,10 @@ module.exports = class CommandHandler {
         logging: {
           channel: null,
           enabled: false
+        },
+        blacklist: {
+          isBlacklisted: false,
+          reason: "[Guild]: No reason provided."
         }
       })
       .run();
@@ -116,13 +114,17 @@ module.exports = class CommandHandler {
           osu: null
         },
         badges: {
+          isBotOwner: false,
           isDeveloper: false,
           isStaff: false,
+          isDonator: false,
           isTrusted: false,
           isNormal: true,
           named: {
+            bot_owner: ':sparkling_heart: Bot Owner',
             developer: '<:developer:469470655209930773> Developer',
             staff: '<:staff:469470655289753600> Staff Member',
+            donator: ':smile: Donator',
             trusted: '<:trusted:469470654836768779> Trusted',
             normal: ':heart: Normal User'
           }
@@ -132,7 +134,15 @@ module.exports = class CommandHandler {
           isMarried: false
         },
         upvoter: false,
-        locale: 'en-US'
+        inventory: {
+          ring: 0,
+          pickaxe: 0
+        },
+        donator: false,
+        blacklist: {
+          isBlacklisted: false,
+          reason: "[User]: No reason provided."
+        }
       }).run();
     this.bot.log.info(`Created the 'users' database for user ${author.username}!`);
   }

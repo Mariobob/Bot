@@ -13,12 +13,12 @@ module.exports = class LizardCommand extends Command {
       cooldown: 5
     });
 
-    this.snek = require('snekfetch');
+    this.request = require('../../util/RequestHandler');
   }
 
   async execute(ctx) {
     try {
-      const { body } = await this.snek.get('https://nekos.life/api/v2/img/lizard');
+      const { body } = await this.request.get('https://nekos.life/api/v2/img/lizard');
 
       return ctx.send({
         description: `<@${ctx.author.id}>: Here is your lizard as requested`,

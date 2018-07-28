@@ -13,12 +13,12 @@ module.exports = class DogCommand extends Command {
       cooldown: 5
     });
 
-    this.snek = require('snekfetch');
+    this.request = require('../../util/RequestHandler');
   }
 
   async execute(ctx) {
     try {
-      const { body } = await this.snek.get('https://dog.ceo/api/breeds/image/random');
+      const { body } = await this.request.get('https://dog.ceo/api/breeds/image/random');
 
       return ctx.send({
         description: `<@${ctx.author.id}>: Here is your doggo as requested! :dog:`,
