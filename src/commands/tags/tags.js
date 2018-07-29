@@ -24,10 +24,3 @@ module.exports = class TagsCommand extends Command {
     });
   }
 };
-
-/*
-			this.r.table('tags').filter({ guildID: msg.channel.guild.id, name: args[0].toLowerCase() }).run((error, tags) => {
-				if (error) return handleDatabaseError(error, msg);
-				if (tags.length < 1) return msg.channel.createMessage(':exclamation:   **»**   Unable to find any tags by that name.');
-				msg.channel.createMessage(tags[0].value);
-			});*/
