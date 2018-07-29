@@ -38,6 +38,7 @@ and you should be all set!
 * [Mantaro](https://mantaro.site) **~** Initial website design. 
 * [dragonfire535](https://github.com/dragonfire535) **~** memes and the RequestHandler for Rem. <3
 * [Aetheryx](https://github.com/Aetheryx) **~** MessageCollector. <3 (~~*love ya aeth*~~)
+* [York](https://github.com/NotAWeebDev) **~** `slots` command.
 
 ## Developers
 |Avatar|Name|Role|
