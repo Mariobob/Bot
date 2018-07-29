@@ -28,19 +28,21 @@ module.exports = class HelpCommand extends Command {
           this.categories[command.options.category].push(command.options.command);
         });
 
-      return ctx.send({
-        title: 'RemBot | Commands',
-        description: `<a:blobwiggling:426425105757765632> Guild Prefix: ${ctx.getPrefix()}\n<:blobThonk:461309895971438602> To get on a command, please do \`${ctx.prefix}help [command]\` or \`@${this.bot.user.username}#${this.bot.user.discriminator} help [command]\``,
-        color: this.bot.color,
-        footer: {
-          icon_url: ctx.author.avatarURL,
-          text: `Commands: ${this.bot.cmds.filter(c => !c.options.hidden).length} // Love you guys <3`
-        },
-        fields: Object.keys(this.categories).map((c) => ({
-          name: `❯ ${c in this.bot.constants.help ? this.bot.constants.help[c] : ":question:"} ${c} [${this.categories[c].length}]`,
-          value: `\`${this.categories[c].join("`, `")}\``
+      ctx.author.getDMChannel()
+        .then((message) => message.createMessage({
+          embed: {
+            color: this.bot.color,
+            footer: {
+              icon_url: ctx.author.avatarURL,
+              text: `Commands: ${this.bot.cmds.filter(c => !c.options.hidden).length} // Love you guys <3`
+            },
+            fields: Object.keys(this.categories).map((c) => ({
+              name: `❯ ${c in this.bot.constants.help ? this.bot.constants.help[c] : ":question:"} ${c} [${this.categories[c].length}]`,
+              value: `\`${this.categories[c].join("`, `")}\``
+            }))
+          }
         }))
-      });
+        .catch(() => ctx.send(`${this.bot.constants.emojis.ERROR} | Can't send help message in DM's.`));
     }
 
     const command = this.bot.cmds.filter((c) => c.options.command === args[0] || c.options.aliases.includes(args[0]) && !c.options.hidden);

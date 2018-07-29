@@ -29,7 +29,6 @@ module.exports = class RemClient extends Eris {
       db: 'RemBot'
     });
     this.collector = new MessageCollector(this);
-    this.request = require('../../util/RequestHandler');
     this.firstTime = false; // If it's your first time running the bot.
 
     if (this.firstTime === true) return this.runFirstSequence();

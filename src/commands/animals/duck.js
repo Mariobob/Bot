@@ -10,7 +10,7 @@ module.exports = class DuckCommand extends Command {
       cooldown: 5
     });
 
-    this.request = require('../../util/RequestHandler');
+    this.request = require('node-superfetch');
   }
 
   async execute(ctx) {

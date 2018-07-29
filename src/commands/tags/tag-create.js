@@ -28,7 +28,7 @@ module.exports = class TagCreateCommand extends Command {
         value: args.slice(1).join(' ')
       }).run((error) => {
         if (error) return this.bot.utils.handleDatabaseError(error);
-        return ctx.send(`${this.bot.constants.emojis.SUCCESS} | Tag \`${args[0].toLowerCase()}\` now is in the database.`);
+        return ctx.send(`${this.bot.constants.emojis.SUCCESS} | Tag \`${args[0].toLowerCase()}\` is now is in the database.`);
       });
     });
   }

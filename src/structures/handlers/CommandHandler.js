@@ -26,8 +26,6 @@ module.exports = class CommandHandler {
     const ctx = new Context(this.bot, msg);
     ctx.setPrefix(gConfig.prefix);
 
-    if (uConfig.blacklist.isBlacklisted || gConfig.blacklist.isBlacklisted) return;
-
     const args = msg.content.slice(prefix[0].length).trim().split(/ +/g);
     const command = args.shift();
     const cmd = this.bot.cmds.filter((c) => c.options.command === command || c.options.aliases.includes(command));
@@ -63,7 +61,7 @@ module.exports = class CommandHandler {
 
       try {
         await cmd[0].execute(ctx, args);
-        this.bot.log.custom(msg.channel.type === 1 ? 'DM' : ctx.guild.name, `User ${ctx.author.username}#${ctx.author.discriminator} ran the command ${command ? cmd[0].options.name : command}~`);
+        this.bot.log.custom(msg.channel.type === 1 ? 'DM' : ctx.guild.name, `User ${ctx.author.username}#${ctx.author.discriminator} ran the command ${command ? cmd[0].options.command : command}~`);
       } catch(err) {
         this.bot.log.error(err.stack);
         return ctx.send(`${this.bot.constants.emojis.ERROR} | The command has failed to execute, the incident has been logged.`);

@@ -11,6 +11,8 @@ const client = new Client({
   }
 });
 
+client.launch();
+
 process.on('unhandledRejection', (e) => {
   client.log.error(e.stack);
 });

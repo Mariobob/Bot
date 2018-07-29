@@ -285,7 +285,7 @@ module.exports = class RemUtil {
 
   post() {
     // DBL (More soon TM)
-    this.bot.request.post(`https://discordbots.org/api/bots/${this.bot.user.id}/stats`)
+    require('node-superfetch').post(`https://discordbots.org/api/bots/${this.bot.user.id}/stats`)
       .set('Authorization', this.bot.config.api_keys.oliyBots)
       .send({
         server_count: this.bot.guilds.size,

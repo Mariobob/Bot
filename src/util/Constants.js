@@ -50,5 +50,6 @@ exports.help = {
   Settings: ':gear:',
   "Text Edit": ":pencil:",
   Utility: ':tools:',
-  "Minigames": ":video_game:"
+  "Minigames": ":video_game:",
+  Tags: '<:tag:472988218334249000>'
 };
