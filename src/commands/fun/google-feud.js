@@ -8,7 +8,7 @@ module.exports = class GoogleFeudCommand extends Command {
       description: 'Play Google Feud with Rem!',
       syntax: 'google-feud',
       guildOnly: true,
-      category: 'Minigames',
+      category: 'Fun',
       cooldown: 30
     });
 

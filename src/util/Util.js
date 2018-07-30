@@ -376,4 +376,20 @@ module.exports = class RemUtil {
     if (typeof dict !== 'object') throw new TypeError("'dict' must be an object. ;w;");
     return text.split('').map(letter => dict[letter] || letter).join(join);
   }
+
+  today(timeZone) {
+    const now = new Date();
+    if (timeZone) now.setUTCHours(now.getUTCHours() + timeZone);
+    now.setHours(0);
+    now.setMinutes(0);
+    now.setSeconds(0);
+    now.setMilliseconds(0);
+    return now;
+  }
+
+  tomorrow(timeZone) {
+    const today = this.today(timeZone);
+    today.setDate(today.getDate() + 1);
+    return today;
+  }
 };

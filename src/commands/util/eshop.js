@@ -36,7 +36,6 @@ module.exports = class EShopCommand extends Command {
         ].join('\n')
       });
     } catch(error) {
-      this.bot.log.error(error.stack);
       return ctx.send(`${this.bot.constants.emojis.ERROR} | An error has occured: \`${error.message}\`. Try again later!`);
     }
   }

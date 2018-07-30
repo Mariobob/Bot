@@ -7,22 +7,22 @@ module.exports = class Logger {
   }
 
   info(message) {
-    return console.info(`${this.t} [${cyan('INFO')}] >> ${white(message)}`);
+    return console.info(`${this.t} [${cyan('INFO')}] » ${white(message)}`);
   }
 
   error(message) {
-    return console.error(`${this.t} [${red('ERROR')}] >> ${white(message)}`);
+    return console.error(`${this.t} [${red('ERROR')}] » ${white(message)}`);
   }
 
   warn(message) {
-    return console.warn(`${this.t} [${yellow('WARNING')}] >> ${white(message)}`);
+    return console.warn(`${this.t} [${yellow('WARNING')}] » ${white(message)}`);
   }
 
   debug(message) {
-    return console.debug(`${this.t} [${green('DEBUG')}] >> ${white(message)}`);
+    return console.debug(`${this.t} [${green('DEBUG')}] » ${white(message)}`);
   }
 
   custom(title, message) {
-    return console.log(`${this.t} [${magenta(title)}] >> ${white(message)}`);
+    return console.log(`${this.t} [${magenta(title)}] » ${white(message)}`);
   }
 };

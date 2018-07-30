@@ -1,0 +1,9 @@
+node_modules/
+archives/
+temp/
+
+.brackets/
+.github/
+.vscode/
+.git/
+.vs/

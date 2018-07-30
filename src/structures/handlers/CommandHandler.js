@@ -89,10 +89,6 @@ module.exports = class CommandHandler {
         logging: {
           channel: null,
           enabled: false
-        },
-        blacklist: {
-          isBlacklisted: false,
-          reason: "[Guild]: No reason provided."
         }
       })
       .run();
@@ -136,11 +132,7 @@ module.exports = class CommandHandler {
           ring: 0,
           pickaxe: 0
         },
-        donator: false,
-        blacklist: {
-          isBlacklisted: false,
-          reason: "[User]: No reason provided."
-        }
+        donator: false
       }).run();
     this.bot.log.info(`Created the 'users' database for user ${author.username}!`);
   }
