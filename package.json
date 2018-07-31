@@ -1,7 +1,7 @@
 {
     "name": "rembot",
     "description": "An customizable, stable Discord Bot for Fun, Music, Memes, Economy, and more!",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "dependencies": {
         "animu.js": "0.1.0",
         "cleverbot.io": "1.0.4",
@@ -9,7 +9,6 @@
         "dadjoke.js": "0.1.0",
         "eris": "0.8.6",
         "eris-lavalink": "1.0.2",
-        "eslint": "5.2.0",
         "form-data": "2.3.2",
         "google-translate-api": "2.3.0",
         "hentai.js": "1.3.6",
@@ -26,5 +25,9 @@
     "scripts": {
         "test": "eslint .",
         "start": "cd src && node Rem.js"
+    },
+    "devDependencies": {
+        "eslint-config-rembot": "0.0.1",
+        "eslint": "5.2.0"
     }
 }
