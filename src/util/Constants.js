@@ -46,7 +46,6 @@ exports.help = {
   Fun: ':rofl:',
   General: ':information_source:',
   Marriage: ':bride_with_veil:',
-  Music: '<a:music:466727792910794754>',
   Settings: ':gear:',
   "Text Edit": ":pencil:",
   Utility: ':tools:',

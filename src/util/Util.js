@@ -392,4 +392,8 @@ module.exports = class RemUtil {
     today.setDate(today.getDate() + 1);
     return today;
   }
+
+  removeDuplicates(array) {
+    return Array.from(new Set(array).values());
+  }
 };

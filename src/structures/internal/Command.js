@@ -11,14 +11,14 @@ module.exports = class RemCommand {
     enabled = true,
     cooldown = 3,
     hidden = false,
-    children = []
+    permissions = []
   }) {
     this.bot = bot;
     this.options = {
       command, description, syntax,
       aliases, category, guildOnly,
       nsfw, ownerOnly, enabled,
-      cooldown, hidden, children
+      cooldown, hidden, permissions
     };
   }
 

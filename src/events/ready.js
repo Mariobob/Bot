@@ -17,15 +17,6 @@ module.exports = class extends Event {
         type: 0
       });
     }
-
     this.bot.utils.post();
-
-    if (!(this.bot.voiceConnections instanceof PlayerManager)) {
-      this.bot.voiceConnections = new PlayerManager(this.bot, this.bot.config.lavalink.nodes, {
-        defaultRegion: 'us',
-        numShards: this.bot.shards.size,
-        userId: this.bot.user.id
-      });
-    }
   }
 };

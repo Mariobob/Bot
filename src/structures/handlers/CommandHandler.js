@@ -18,6 +18,8 @@ module.exports = class CommandHandler {
     if (!gConfig) return this.newGuild(msg.channel.guild);
     if (!uConfig) return this.newUser(msg.author);
 
+    const permissions = msg.channel.permissionsOf(this.bot.user.id);
+    
     let prefix = new RegExp(`^<@!?${this.bot.user.id}> |^${this.bot.utils.escapeRegExp('rem ')} |^${this.bot.utils.escapeRegExp(gConfig.prefix)}`)
       .exec(msg.content);
     
@@ -31,9 +33,12 @@ module.exports = class CommandHandler {
     const cmd = this.bot.cmds.filter((c) => c.options.command === command || c.options.aliases.includes(command));
 
     if (cmd.length > 0) {
+      if (!gConfig.disabledCommands.includes(cmd[0])) return;
+
       if (cmd[0].options.guildOnly && ctx.guild.type === 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You're not in a guild.`);
       if (cmd[0].options.ownerOnly && !this.bot.isOwner(ctx.author.id)) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't own this bot.`);
       if (cmd[0].options.nsfw && !msg.channel.nsfw) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must be in an nsfw-marked channel.`);
+      if ((cmd[0].options.permissions && cmd[0].options.permissions.some(p => !permissions.has(p))) || !permissions.has('sendMessages')) return;
 
       if (!this.cooldowns.has(cmd[0].options.command)) {
         this.cooldowns.set(cmd[0].options.command, new Collection());
