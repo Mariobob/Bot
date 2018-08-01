@@ -34,11 +34,11 @@ module.exports = class HelpCommand extends Command {
             color: this.bot.color,
             footer: {
               icon_url: ctx.author.avatarURL,
-              text: `Commands: ${this.bot.cmds.filter(c => !c.options.hidden).length} // Love you guys <3`
+              text: `Commands: ${this.bot.cmds.filter(c => !c.options.hidden).length} `
             },
             fields: Object.keys(this.categories).map((c) => ({
-              name: `❯ ${c in this.bot.constants.help ? this.bot.constants.help[c] : ":question:"} ${c} [${this.categories[c].length}]`,
-              value: `\`${this.categories[c].join("`, `")}\``
+              name: `❯ ${c} [${this.categories[c].length}]`,
+              value: `\`${this.categories[c].join("` `")}\``
             }))
           }
         }))

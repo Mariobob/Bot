@@ -31,7 +31,7 @@ module.exports = class LoggingCommand extends Command {
             if (!message) return ctx.send(`${this.bot.constants.emojis.ERROR} | Prompt timed out.`);
 
             if (this.no.includes(message.content.toLowerCase())) {
-              return ctx.send(`${this.bot.constants.emojis.ERROR} | No loggings in <#${c.id}>? Noted.`);
+              return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't to see some events in <#${c.id}>? Ok!`);
             } else {
               this.bot.r.table('guilds').get(ctx.guild.id).update({
                 logging: {
@@ -39,7 +39,7 @@ module.exports = class LoggingCommand extends Command {
                 }
               }).run((error) => {
                 if (error) return this.bot.utils.handleDatabaseError(error);
-                return ctx.send(`${this.bot.constants.emojis.MEMO} | Logging channel has been set in <#${c.id}>.`);
+                return ctx.send(`${this.bot.constants.emojis.MEMO} | The logging channel has been set in <#${c.id}>.`);
               });
             }
           });
@@ -55,7 +55,7 @@ module.exports = class LoggingCommand extends Command {
         if (!message) return ctx.send(`${this.bot.constants.emojis.ERROR} | Prompt timed out.`);
 
         if (this.no.includes(message.content.toLowerCase())) {
-          return ctx.send(`${this.bot.constants.emojis.ERROR} | So no logging ${enabled === true ? "enable" : "disable"}? Noted.`);
+          return ctx.send(`${this.bot.constants.emojis.ERROR} | So you do not wanna ${enabled === true ? "enable" : "disable"} logging? Noted.`);
         } else {
           this.bot.r.table('guilds').get(ctx.guild.id).update({
             logging: {

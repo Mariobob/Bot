@@ -1,6 +1,5 @@
 const Context = require('../internal/Context');
 const { Collection } = require('eris');
-const i18n = require('i18n');
 
 module.exports = class CommandHandler {
   constructor(bot) {
@@ -33,8 +32,6 @@ module.exports = class CommandHandler {
     const cmd = this.bot.cmds.filter((c) => c.options.command === command || c.options.aliases.includes(command));
 
     if (cmd.length > 0) {
-      if (!gConfig.disabledCommands.includes(cmd[0])) return;
-
       if (cmd[0].options.guildOnly && ctx.guild.type === 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You're not in a guild.`);
       if (cmd[0].options.ownerOnly && !this.bot.isOwner(ctx.author.id)) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't own this bot.`);
       if (cmd[0].options.nsfw && !msg.channel.nsfw) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must be in an nsfw-marked channel.`);
@@ -80,7 +77,6 @@ module.exports = class CommandHandler {
       .insert({
         id: guild.id,
         prefix: this.bot.config.prefix,
-        disabledCommands: [],
         greetings: {
           message: ':wave: | Welcome $(user) to $(guild)!',
           enabled: false,
@@ -134,8 +130,8 @@ module.exports = class CommandHandler {
         },
         upvoter: false,
         inventory: {
-          ring: 0,
-          pickaxe: 0
+          rings: 0,
+          pickaxes: 0
         },
         donator: false
       }).run();

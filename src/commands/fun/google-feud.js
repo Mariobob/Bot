@@ -12,7 +12,7 @@ module.exports = class GoogleFeudCommand extends Command {
       cooldown: 30
     });
 
-    this.question = questions[Math.floor(Math.random() * questions.length)];
+    this.questions = questions[Math.floor(Math.random() * questions.length)];
     this.playing = new Set();
     this.snek = require('snekfetch');
   }
@@ -22,7 +22,7 @@ module.exports = class GoogleFeudCommand extends Command {
     this.playing.add(ctx.channel.id);
 
     try {
-      const suggestions = await this.fetch(this.question);
+      const suggestions = await this.fetch(this.questions);
       if (!suggestions) ctx.send(`${this.bot.constants.emojis.ERROR} | No results found.`);
 
       const display = new Array(suggestions.length).fill('???');
@@ -59,7 +59,10 @@ module.exports = class GoogleFeudCommand extends Command {
       }
 
       this.playing.delete(ctx.channel.id);
-      if (!display.includes('???')) return ctx.send(":tada: | You win! Nice job.");
+      if (!display.includes('???')) {
+        this.bot.utils.updateBalance(ctx.author.id, 500)
+        return ctx.send(`:cake: | Nice! You got cake. I'm kidding, you got \`500¥\`. Go you!`);
+      }
       return ctx.send(':cry: | Better next time.');
     } catch(error) {
       this.playing.delete(ctx.channel.id);

@@ -26,7 +26,7 @@ module.exports = class PrefixCommand extends Command {
     }).run((error) => {
       if (error) return this.bot.utils.handleDatabaseError(error);
       ctx.setPrefix(prefix);
-      return ctx.send(`${this.bot.constants.emojis.MEMO} | The prefix is now \`${prefix}\`. ;w;`);
+      return ctx.send(`${this.bot.constants.emojis.MEMO} | The prefix is now \`${prefix}\`.`);
     });
   }
 };

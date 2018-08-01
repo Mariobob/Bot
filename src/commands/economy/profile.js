@@ -21,7 +21,7 @@ module.exports = class ProfileCommand extends Command {
           title: `${ctx.author.username}#${ctx.author.discriminator}'s Profile:`,
           description: [
             `**${uConfig.profile.description}**\n`,
-            `${uConfig.badges.isDeveloper === true ? uConfig.badges.named.developer : uConfig.badges.isStaff === true ? uConfig.badges.named.staff : uConfig.badges.isTrusted === true ? uConfig.badges.named.trusted : uConfig.badges.named.normal}\n`,
+            `${uConfig.badges.isBotOwner === true ? uConfig.badges.named.bot_owner : uConfig.badges.isDeveloper === true ? uConfig.badges.named.developer : uConfig.badges.isStaff === true ? uConfig.badges.named.staff : uConfig.badges.isDonator === true ? uConfig.badges.named.donator : uConfig.badges.isTrusted === true ? uConfig.badges.named.trusted : uConfig.badges.named.normal}\n`,
             `**Coins**: *${uConfig.coins.toLocaleString()}¥*`,
             `**Waifu**: *${uConfig.profile.waifu || `Get a waifu by doing the command: \`${ctx.prefix}profile set waifu <waifu>\``}*`,
             `**osu!**: *${uConfig.profile.osu || `Add your osu! profile by doing the command: \`${ctx.prefix}profile set osu <osu_username>\``}*`,
@@ -88,7 +88,7 @@ module.exports = class ProfileCommand extends Command {
                 title: `${user.username}#${user.discriminator}'s Profile:`,
                 description: [
                   `**${uConfig.profile.description}**\n`,
-                  `${uConfig.badges.isDeveloper === true ? uConfig.badges.named.developer : uConfig.badges.isStaff === true ? uConfig.badges.named.staff : uConfig.badges.isTrusted === true ? uConfig.badges.named.trusted : uConfig.badges.named.normal}\n`,
+                  `${uConfig.badges.isBotOwner === true ? uConfig.badges.named.bot_owner : uConfig.badges.isDeveloper === true ? uConfig.badges.named.developer : uConfig.badges.isStaff === true ? uConfig.badges.named.staff : uConfig.badges.isDonator === true ? uConfig.badges.named.donator : uConfig.badges.isTrusted === true ? uConfig.badges.named.trusted : uConfig.badges.named.normal}\n`,
                   `**Coins**: *${uConfig.coins.toLocaleString()}¥*`,
                   `**Waifu**: *${uConfig.profile.waifu || `Get a waifu by doing the command: \`${ctx.prefix}profile set waifu <waifu>\``}*`,
                   `**osu!**: *${uConfig.profile.osu || `Add your osu! profile by doing the command: \`${ctx.prefix}profile set osu <osu_username>\``}*`,
