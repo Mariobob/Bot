@@ -64,7 +64,7 @@ An customizable, stable Discord Bot for Fun, Music, Memes, Economy, and more!
 * **divorce**: `Divorce your loved one.`
 * **marry**: `Marry someone if you're lonely.`
 
-## Search (7 Commands):
+### Search (7 Commands):
 * **eshop**: `Searches the Nintendo eShop for a game.`
 * **github**: `Searches information about a GitHub repository or user.`
 * **mdn**: `Searches the Mozilla Developer Network for JavaScript prototypes.`
