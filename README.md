@@ -1,6 +1,8 @@
 # RemBot
 [![Discord](https://discordapp.com/api/guilds/382725233695522816/embed.png)](https://discord.gg/gzPtR34) [![Donate on Patreon](https://img.shields.io/badge/patreon-donate-orange.svg)](https://patreon.com/ohlookitsAugust) [![Build Status](https://travis-ci.org/ohlookitsAugust/RemBot.svg?branch=master)](https://travis-ci.org/ohlookitsAugust/RemBot)
 
+> You can invite Rem with this link [here](https://discordapp.com/oauth2/authorize?client_id=447229568282132510&scope=bot&permissions=0)
+
 An customizable, stable Discord Bot for Fun, Music, Memes, Economy, and more!
 
 ## Commands (86 Commands):
