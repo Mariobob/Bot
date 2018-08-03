@@ -107,6 +107,7 @@ const Languages = {
 };
 const reRegExpExpChar = /[\\^$.*+?()[\]{}|]/g;
 const regHasRegExpChar = new RegExp(reRegExpExpChar.source);
+const request = require('node-superfetch');
 
 module.exports = class RemUtil {
   constructor(bot) {
@@ -284,12 +285,18 @@ module.exports = class RemUtil {
   }
 
   post() {
-    // DBL (More soon TM)
-    require('node-superfetch').post(`https://discordbots.org/api/bots/${this.bot.user.id}/stats`)
+    // discordbots.org
+    request.post(`https://discordbots.org/api/bots/${this.bot.user.id}/stats`)
       .set('Authorization', this.bot.config.api_keys.oliyBots)
       .send({
         server_count: this.bot.guilds.size,
         shard_count: this.bot.shards.size
+      }).end();
+
+    request.post(`https://listcord.com/api/bots/${this.bot.user.id}/guilds`)
+      .set('Authorization', this.bot.config.api_keys.listcord)
+      .send({
+        guilds: this.bot.guilds.size
       }).end();
   }
 

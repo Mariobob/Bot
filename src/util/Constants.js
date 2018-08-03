@@ -2,7 +2,8 @@ const config = require('../config.json');
 const creds = new RegExp([
   config.token,
   config.api_keys.weeb,
-  config.api_keys.oliyBots
+  config.api_keys.oliyBots,
+  config.api_keys.NANI
 ].join('|'), 'gi');
 
 /**
@@ -30,7 +31,7 @@ exports.emojis = {
  * @param {String} str The string of code (Mostly for `eval` and `exec` commands.)
  * @returns {String} The string that replaces the tokens.
  */
-exports.redact = (str) => str.replace(creds, 'Nope!');
+exports.redact = (str) => str.replace(creds, '<Rem:Credentials>');
 
 /**
  * This is useful for the `help` command.

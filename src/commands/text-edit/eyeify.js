@@ -12,6 +12,6 @@ module.exports = class EyeifyCommand extends Command {
 
   execute(ctx, args) {
     if (!args[0]) return ctx.send(`${this.bot.constants.emojis.ERROR} | 👀 What 👀 do 👀 you 👀 need 👀 to 👀 clapify? 👀`);
-    return ctx.send(`👀 ${args.join('👀')} 👀`);
+    return ctx.send(`👀 ${args.join(' 👀 ')} 👀`);
   }
 };

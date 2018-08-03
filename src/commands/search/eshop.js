@@ -7,7 +7,7 @@ module.exports = class EShopCommand extends Command {
       command: 'eshop',
       description: "Searches a game from the Nintendo EShop.",
       syntax: 'eshop [system] [query]',
-      category: 'Utility'
+      category: 'Search'
     });
 
     this.requests = require('node-superfetch');

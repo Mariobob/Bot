@@ -1,7 +1,7 @@
 {
     "name": "rembot",
     "description": "An customizable, stable Discord Bot for Fun, Music, Memes, Economy, and more!",
-    "version": "0.2.2",
+    "version": "0.2.4",
     "dependencies": {
         "animu.js": "0.1.0",
         "cleverbot.io": "1.0.4",

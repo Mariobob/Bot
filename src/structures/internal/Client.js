@@ -7,6 +7,7 @@ const Collection = require('../../util/Collection');
 const Util = require('../../util/Util');
 const Logger = require('../../util/Logger');
 const PermissionUtil = require('../../util/PermissionUtil');
+const Webhook = require('./Webhook');
 
 module.exports = class RemClient extends Eris {
   constructor(options) {
@@ -30,6 +31,9 @@ module.exports = class RemClient extends Eris {
     });
     this.collector = new MessageCollector(this);
     this.firstTime = false; // If it's your first time running the bot.
+    this.webhook = new Webhook(this, {
+      url: this.config.webhook
+    });
 
     if (this.firstTime === true) return this.runFirstSequence();
   }
