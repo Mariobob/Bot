@@ -10,17 +10,18 @@ module.exports = class RemCommand {
     ownerOnly = false,
     enabled = true,
     cooldown = 3,
-    hidden = false,
-    permissions = []
+    hidden = false
   }) {
     this.bot = bot;
     this.options = {
       command, description, syntax,
       aliases, category, guildOnly,
       nsfw, ownerOnly, enabled,
-      cooldown, hidden, permissions
+      cooldown, hidden
     };
   }
 
-  async execute(ctx, args) {}
+  async execute(ctx, args) {
+    throw new SyntaxError(`[${this.options.command}]: Command doesn't override an "execute()" function.`);
+  }
 };

@@ -8,6 +8,7 @@ const Util = require('../../util/Util');
 const Logger = require('../../util/Logger');
 const PermissionUtil = require('../../util/PermissionUtil');
 const Webhook = require('./Webhook');
+const DBLAPI = require('../../lib/DBLAPI');
 
 module.exports = class RemClient extends Eris {
   constructor(options) {
@@ -34,6 +35,7 @@ module.exports = class RemClient extends Eris {
     this.webhook = new Webhook(this, {
       url: this.config.webhook
     });
+    this.dbl = new DBLAPI(this.user.id, this.bot.config.api_keys.oliyBots, this.constants.ua);
 
     if (this.firstTime === true) return this.runFirstSequence();
   }

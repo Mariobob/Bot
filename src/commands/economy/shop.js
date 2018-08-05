@@ -26,7 +26,7 @@ module.exports = class ShopCommand extends Command {
       if (!args[1]) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must provide an item to buy.`);
 
       if (args[1].toLowerCase() === 'ring') {
-        if (this.checkBalance(ctx.author) < 6000) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the nessary funds to buy the 'ring' item.`);
+        if (await this.checkBalance(ctx.author) < 6000) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the nessary funds to buy the 'ring' item.`);
 
         this.bot.r.table('users').get(ctx.author.id).run((error, u) => {
           if (u.inventory.rings) {
@@ -52,7 +52,7 @@ module.exports = class ShopCommand extends Command {
           }
         });
       } else if (args[1].toLowerCase() === 'pickaxe') {
-        if (this.checkBalance(ctx.author) < 20000) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the nessary funds to buy the 'pickaxe' item.`);
+        if (await this.checkBalance(ctx.author) < 20000) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the nessary funds to buy the 'pickaxe' item.`);
 
         this.bot.r.table('users').get(ctx.author.id).run((error, u) => {
           if (u.inventory.rings) {
@@ -82,7 +82,7 @@ module.exports = class ShopCommand extends Command {
       if (!args[1]) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must provide an item to sell.`);
 
       if (args[1].toLowerCase() === 'ring') {
-        if (this.bot.r.table('users').get(ctx.author.id).run().inventory.pickaxes < 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the 'pickaxe' item.`);
+        if (await this.bot.r.table('users').get(ctx.author.id).run().inventory.pickaxes < 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the 'pickaxe' item.`);
 
         this.bot.r.table('users').get(ctx.author.id).run((error, u) => {
           this.bot.r.table('users').get(ctx.author.id).update({
@@ -96,7 +96,7 @@ module.exports = class ShopCommand extends Command {
           });
         });
       } else if (args[1].toLowerCase() === 'pickaxe') {
-        if (this.bot.r.table('users').get(ctx.author.id).run().inventory.rings < 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the 'ring' item.`);
+        if (await this.bot.r.table('users').get(ctx.author.id).run().inventory.rings < 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't have the 'ring' item.`);
 
         this.bot.r.table('users').get(ctx.author.id).run((error, u) => {
           this.bot.r.table('users').get(ctx.author.id).update({

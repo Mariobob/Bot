@@ -5,7 +5,7 @@
 
 An customizable, stable Discord Bot for Fun, Music, Memes, Economy, and more!
 
-## Commands (86 Commands):
+## Commands (85 Commands):
 ### Animals (6 Commands):
 * **birb**: `Grab an random birb photograph`
 * **cat**: `Grabs an random cat photograph`
@@ -38,8 +38,7 @@ An customizable, stable Discord Bot for Fun, Music, Memes, Economy, and more!
 * **google-doodle**: `Searches the google doodle of the month and date.`
 * **neko-atsume-password**: `Shows the current Neko Atsume password.`
 
-### Fun (13 Commands):
-* **aavatar**: `Gives an random anime avatar.`
+### Fun (12 Commands):
 * **anime**: `Searches an anime of your choice from Kitsu.io`
 * **chuck-norris**: `Grabs an random Chuck Norris joke.`
 * **dadjoke**: `Grabs an random Dad Joke.`
@@ -124,7 +123,7 @@ You're allowed to self host Rem but you must credit us.
 You will need the following to make Rem work:
 * [Node.js](https://nodejs.org/en): The runtime framework with JavaScript.
 * [RethinkDB](https://www.rethinkdb.com/): Database
-* git: Cloning the repository.
+* [git](https://git-scm.com): Cloning the repository.
 
 ### Self-hosting: Installing
 You must do the following for Linux/Windows:
@@ -153,6 +152,7 @@ and you should be all set!
 * [dragonfire535](https://github.com/dragonfire535) **~** memes and the RequestHandler for Rem. <3
 * [Aetheryx](https://github.com/Aetheryx) **~** MessageCollector. <3 (~~*love ya aeth*~~)
 * [York](https://github.com/NotAWeebDev) **~** `slots` and `trivia` commands.
+* [Derpy](https://github.com/ohlookitsderpy) **~** NSFW commands.
 
 ## Developers
 |Avatar|Name|Role|

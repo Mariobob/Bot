@@ -20,8 +20,8 @@ module.exports = class ChangelogCommand extends Command {
     return ctx.send({
       title: 'RemBot | Changelog',
       description: commits.map((commit) => {
-        let hash = `**»** [\`${commit.sha.slice(0, 7)}\`](${commit.html_url})`;
-        return `${hash} ${commit.commit.message.split('\n')[0]} **—>** ${commit.author.login}`;
+        let hash = `**»** [\`${commit.sha.slice(0, 5)}\`](${commit.html_url})`;
+        return `${hash} ${commit.commit.message.split('\n')[0]} **—** ${commit.author.login}`;
       }).join('\n'),
       color: this.bot.color
     });

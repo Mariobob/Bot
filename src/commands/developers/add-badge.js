@@ -2,7 +2,9 @@ const { Command } = require('../../structures');
 const badges = [
   'developer',
   'staff',
-  'trusted'
+  'trusted',
+  'bot_owner',
+  'donator'
 ];
 
 module.exports = class AddBadgeCommand extends Command {
@@ -53,6 +55,24 @@ module.exports = class AddBadgeCommand extends Command {
             }).run((error) => {
               if (error) return this.bot.utils.handleDatabaseError(error);
               return ctx.send(`${this.bot.constants.emojis.SUCCESS} | User **${user.username}#${user.discriminator}** now has the **Trusted** badge.`);
+            });
+          } else if (args[1].toLowerCase() === 'donator') {
+            this.bot.r.table('users').get(user.id).update({
+              badges: {
+                isDonator: true
+              }
+            }).run((error) => {
+              if (error) return this.bot.utils.handleDatabaseError(error);
+              return ctx.send(`${this.bot.constants.emojis.SUCCESS} | User **${user.username}#${user.discriminator}** now has the **Donator** badge.`);
+            });
+          } else if (args[1].toLowerCase() === 'bot_owner') {
+            this.bot.r.table('users').get(user.id).update({
+              badges: {
+                isBotOwner: true
+              }
+            }).run((error) => {
+              if (error) return this.bot.utils.handleDatabaseError(error);
+              return ctx.send(`${this.bot.constants.emojis.SUCCESS} | User **${user.username}#${user.discriminator}** now has the **Bot Owner** badge.`);
             });
           }
         });

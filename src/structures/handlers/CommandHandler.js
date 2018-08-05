@@ -35,7 +35,7 @@ module.exports = class CommandHandler {
       if (cmd[0].options.guildOnly && ctx.guild.type === 1) return ctx.send(`${this.bot.constants.emojis.ERROR} | You're not in a guild.`);
       if (cmd[0].options.ownerOnly && !this.bot.isOwner(ctx.author.id)) return ctx.send(`${this.bot.constants.emojis.ERROR} | You don't own this bot.`);
       if (cmd[0].options.nsfw && !msg.channel.nsfw) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must be in an nsfw-marked channel.`);
-      if ((cmd[0].options.permissions && cmd[0].options.permissions.some(p => !permissions.has(p))) || !permissions.has('sendMessages')) return;
+      if (cmd[0].options.nsfw && !this.bot.dbl.getUserUpvoted(ctx.author.id)) return ctx.send(`${this.bot.constants.emojis.ERROR} | You must upvote on Discord Bot List to access this command. Upvote here: **<https://discordbots.org/bot/${this.bot.user.id}>**`);
 
       if (!this.cooldowns.has(cmd[0].options.command)) {
         this.cooldowns.set(cmd[0].options.command, new Collection());
@@ -53,8 +53,8 @@ module.exports = class CommandHandler {
         const expirationTime = timestamps.get(msg.author.id) + cooldownAmount;
 
         if (now < expirationTime) {
-                const timeLeft = (expirationTime - now) / 1000;
-                return ctx.send(`${this.bot.constant.emojis.MEMO} | You have \`${timeLeft.toFixed()} second${timeLeft > 1 ? "s" : ""}\` before execute the \`${cmd[0].options.command}\` command.`);
+          const timeLeft = (expirationTime - now) / 1000;
+          return ctx.send(`${this.bot.constant.emojis.MEMO} | You have \`${timeLeft.toFixed()} second${timeLeft > 1 ? "s" : ""}\` before execute the \`${cmd[0].options.command}\` command.`);
         }
 
         timestamps.set(msg.author.id, now);
@@ -93,7 +93,7 @@ module.exports = class CommandHandler {
         }
       })
       .run();
-    this.bot.log.info(`Created the 'guilds' database for guild ${guild.name}`);
+    this.bot.log.info(`Created the 'guilds' table for guild ${guild.name}`);
   }
 
   newUser(author) {
@@ -135,6 +135,6 @@ module.exports = class CommandHandler {
         },
         donator: false
       }).run();
-    this.bot.log.info(`Created the 'users' database for user ${author.username}!`);
+    this.bot.log.info(`Created the 'users' table for user ${author.username}!`);
   }
 };
